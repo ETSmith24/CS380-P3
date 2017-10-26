@@ -17,8 +17,7 @@ import java.net.Socket;
 import java.lang.Math;
 public class Ipv4Client
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 	//public static int LEN = 2;
 	Socket socket;
 	byte[] version;
@@ -44,10 +43,34 @@ public class Ipv4Client
 	catch(IOException e)
 	    {
 		e.printStackTrace();
-	    }
-	
-	    
-	    
+	    }  
     }
+	
+	public static short checksum(byte[] b) {
+		int length = b.length;
+        int i = 0;
+        long returnValue = 0;
+        long sum = 0;
+
+        while (length > 1) {
+            sum += ((b[i] << 8 & 0xFF00) | ((b[i + 1]) & 0x00FF));
+            i += 2;
+            length -= 2;
+            if ((sum & 0xFFFF0000) > 0) {
+                sum &= 0xFFFF;
+                sum++;
+            }
+        }
+        //if statement triggers if we are given an odd number of bytes
+        if (length > 0) {
+            sum += b[i] << 8 & 0xFF00;
+            if ((sum & 0xFFFF0000) > 0) {
+                sum &= 0xFFFF;
+                sum++;
+            }
+        }
+        returnValue = (~((sum & 0xFFFF) + (sum >> 16))) & 0xFFFF;
+        return (short) returnValue;
+	}
 
 }
