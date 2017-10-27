@@ -1,4 +1,4 @@
-x// ============================================================================
+// ============================================================================
 // file: Ipv4Client.java
 // ============================================================================
 // Programmers: David Shin & Ethan Smith
@@ -15,6 +15,12 @@ x// ============================================================================
 import java.io.IOException;
 import java.net.Socket;
 import java.lang.Math;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.BufferedReader;
+
 public class Ipv4Client
 {
     public static void main(String[] args) {
@@ -30,7 +36,14 @@ public class Ipv4Client
 	try{
 	    socket = new Socket("18.221.102.182", 38003);
 	    System.out.println("Connected to server");
-
+	    //setting up input stream
+	    InputStream is = socket.getInputStream();
+	    InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+	    BufferedReader br = new BufferedReader(isr);
+	    //setting up output stream
+	    OutputStream os = socket.getOutputStream();
+	    PrintStream ps = new PrintStream(os);
+	    
 
 	    for(int i = 1; i <= 12; i++)
 		{
