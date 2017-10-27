@@ -30,16 +30,26 @@ public class Ipv4Client
 	try{
 	    socket = new Socket("18.221.102.182", 38003);
 	    System.out.println("Connected to server");
+<<<<<<< HEAD
 	    
+=======
+>>>>>>> ba8bd02f0dbbb6e7ee68f46b120f2fde14b0b709
 	    //setting up input stream
 	    InputStream is = socket.getInputStream();
 	    InputStreamReader isr = new InputStreamReader(is, "UTF-8");
 	    BufferedReader br = new BufferedReader(isr);
+<<<<<<< HEAD
 	    
+=======
+>>>>>>> ba8bd02f0dbbb6e7ee68f46b120f2fde14b0b709
 	    //setting up output stream
 	    OutputStream os = socket.getOutputStream();
 	    PrintStream ps = new PrintStream(os);
 	    
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba8bd02f0dbbb6e7ee68f46b120f2fde14b0b709
 	    for(int i = 1; i <= 12; i++)
 		{
 		    //creates a new byte array for data of length 2,4,8,16,32,64,128,256,512,1024,2048
@@ -47,6 +57,7 @@ public class Ipv4Client
 		    //FrameFill returns a byte array in IPv4 format
 		    data = FrameFill(data);
 		    ps.write(data);
+<<<<<<< HEAD
 		    System.out.println("data length :" + data.length);
 		    System.out.println(br.readLine() + '\n');
 		}
@@ -57,6 +68,21 @@ public class Ipv4Client
 	}//end main
 
     public static byte[] FrameFill(byte[] data) {
+=======
+		    System.out.println(br.readLine() + '\n');
+		    // System.out.println("data length :" + data.length);
+		}
+
+	}//end try-block
+	catch(IOException e)
+	    {
+		e.printStackTrace();
+	    }  
+    }//end main
+
+    public static byte[] FrameFill(byte[] data)
+    {
+>>>>>>> ba8bd02f0dbbb6e7ee68f46b120f2fde14b0b709
 	short length = (short) data.length;
 	data[0] = 0x45; //version 4, header length 5
 	data[1] = 0x0;//type of service
